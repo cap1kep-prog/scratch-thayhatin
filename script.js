@@ -15,7 +15,7 @@ async function nopBai() {
     reader.onload = async function () {
       let base64 = reader.result.split(',')[1];
 
-      await fetch("LINK_APPS_SCRIPT", {
+      await fetch("https://script.google.com/macros/s/AKfycby07VptQTyXT2iJf7qB4H0yGreGX-FF3gnHE5oFzcLMyX4EzCFrwCvpEBI4xd7TUMFIqQ/exec", {
         method: "POST",
         mode: "no-cors",
         headers: {
