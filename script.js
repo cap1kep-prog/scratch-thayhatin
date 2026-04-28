@@ -1,34 +1,36 @@
 async function nopBai() {
   try {
     let ten = prompt("Nhập tên của em:");
+    let fileInput = document.getElementById("fileInput");
 
-    if (!ten) {
-      alert("Chưa nhập tên!");
+    if (!fileInput.files.length) {
+      alert("Chưa chọn file!");
       return;
     }
 
-    const noiDung = "Bài của " + ten;
+    let file = fileInput.files[0];
 
-    const data = btoa(unescape(encodeURIComponent(noiDung)));
+    let reader = new FileReader();
 
-    const response = await fetch("https://script.google.com/macros/s/AKfycby07VptQTyXT2iJf7qB4H0yGreGX-FF3gnHE5oFzcLMyX4EzCFrwCvpEBI4xd7TUMFIqQ/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: ten + "_" + Date.now() + ".txt",
-        file: data
-      })
-    });
+    reader.onload = async function () {
+      let base64 = reader.result.split(',')[1];
 
-    const result = await response.json();
+      await fetch("LINK_APPS_SCRIPT", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: ten + "_" + file.name,
+          file: base64
+        })
+      });
 
-    if (result.status === "success") {
-      alert("✅ Nộp bài thành công!");
-    } else {
-      alert("❌ Lỗi!");
-    }
+      alert("✅ Đã gửi bài! (kiểm tra Drive)");
+    };
+
+    reader.readAsDataURL(file);
 
   } catch (err) {
     alert("❌ Lỗi: " + err);
