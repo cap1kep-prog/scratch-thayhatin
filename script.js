@@ -2,7 +2,7 @@ async function nopBai() {
   try {
     let ten = prompt("Nhập tên của em:");
 
-    const response = await fetch("DÁN_LINK_APPS_SCRIPT", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbznmu6bq1h1gU65vjNSBCCcG8vr5WnU46R53_030Sptysfk6qOD0G7k6vLxhSZcoZbKcQ/exec", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
