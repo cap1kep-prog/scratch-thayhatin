@@ -9,7 +9,7 @@ async function nopBai() {
       },
       body: JSON.stringify({
         name: ten + "_" + Date.now() + ".txt",
-        file: btoa("Bài nộp của " + ten)
+        file:const data = btoa(unescape(encodeURIComponent(noiDung)));
       })
     });
 
