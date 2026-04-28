@@ -11,7 +11,7 @@ async function nopBai() {
 
     const data = btoa(unescape(encodeURIComponent(noiDung)));
 
-    const response = await fetch("https://script.google.com/macros/s/AKfycbybZuPRNcaE2HuTNpL5Y4u6SjNM7DAyXMEYWA_d0NPvI5Dbpw_6byfs12dtERIf1SELnA/exec", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycby07VptQTyXT2iJf7qB4H0yGreGX-FF3gnHE5oFzcLMyX4EzCFrwCvpEBI4xd7TUMFIqQ/exec", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
