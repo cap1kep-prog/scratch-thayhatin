@@ -1,20 +1,174 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Nộp bài Scratch</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nộp Bài Scratch</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#e5e5e5;
+}
+
+.topbar{
+    background:#ff4d4d;
+    color:white;
+    padding:18px 24px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.container{
+    width:900px;
+    margin:30px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:8px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:15px;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    background:#2b78e4;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1666d3;
+}
+
+</style>
 </head>
 
 <body>
-  <h1>🎮 Nộp bài Scratch</h1>
 
-  <p>👉 Bước 1: Mở Scratch và làm bài</p>
-  <p>👉 Bước 2: Lưu file (.sb3) về máy</p>
+<div class="topbar">
+📘 Nộp Bài Scratch Cho Thầy
+</div>
 
-  <input type="file" id="fileInput" accept=".sb3"><br><br>
+<div class="container">
 
-  <button onclick="nopBai()">📤 Nộp bài</button>
+<label>Họ và tên học sinh</label>
+<input
+type="text"
+id="hoten"
+placeholder="Nhập họ tên">
 
-  <script src="script.js"></script>
+<label>Lớp</label>
+<input
+type="text"
+id="lop"
+placeholder="Ví dụ: 4A">
+
+<label>Tên bài</label>
+<input
+type="text"
+id="tenbai"
+placeholder="Tên bài Scratch">
+
+<label>Link bài Scratch (dán link từ scratch.mit.edu)</label>
+<input
+type="text"
+id="link"
+placeholder="https://scratch.mit.edu/projects/...">
+
+<button onclick="nopBai()">
+Nộp bài cho thầy
+</button>
+
+</div>
+
+<script>
+
+async function nopBai(){
+
+    const hoten =
+        document.getElementById("hoten").value;
+
+    const lop =
+        document.getElementById("lop").value;
+
+    const tenbai =
+        document.getElementById("tenbai").value;
+
+    const link =
+        document.getElementById("link").value;
+
+    if(!hoten || !lop || !tenbai || !link){
+        alert("Vui lòng nhập đầy đủ thông tin");
+        return;
+    }
+
+    const data = {
+        hoten: hoten,
+        lop: lop,
+        tenbai: tenbai,
+        link: link
+    };
+
+    try{
+
+        const response = await fetch(
+            "DÁN_LINK_APPS_SCRIPT_WEBAPP_Ở_ĐÂY",
+            {
+                method:"POST",
+                body:JSON.stringify(data)
+            }
+        );
+
+        const result = await response.json();
+
+        if(result.status === "success"){
+
+            alert("✅ Đã nộp bài thành công");
+
+            document.getElementById("hoten").value = "";
+            document.getElementById("lop").value = "";
+            document.getElementById("tenbai").value = "";
+            document.getElementById("link").value = "";
+
+        }else{
+
+            alert("❌ " + result.message);
+
+        }
+
+    }catch(err){
+
+        alert("❌ Lỗi gửi bài");
+
+    }
+
+}
+
+</script>
+
 </body>
 </html>
