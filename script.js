@@ -1,38 +1,44 @@
-async function nopBai() {
+function doPost(e) {
+
+  var output = ContentService.createTextOutput();
+  output.setMimeType(ContentService.MimeType.JSON);
+
   try {
-    let ten = prompt("Nhập tên của em:");
-    let fileInput = document.getElementById("fileInput");
 
-    if (!fileInput.files.length) {
-      alert("Chưa chọn file!");
-      return;
-    }
+    var sheet =
+      SpreadsheetApp.openById("ID_GOOGLE_SHEET")
+      .getSheetByName("Sheet1");
 
-    let file = fileInput.files[0];
+    var data =
+      JSON.parse(e.postData.contents);
 
-    let reader = new FileReader();
+    sheet.appendRow([
+      new Date(),
+      data.hoten,
+      data.lop,
+      data.tenbai,
+      data.link
+    ]);
 
-    reader.onload = async function () {
-      let base64 = reader.result.split(',')[1];
+    output.setContent(
+      JSON.stringify({
+        status:"success"
+      })
+    );
 
-      await fetch("https://script.google.com/macros/s/AKfycbzovo1fe6W76wgzLzitML5EZqLcUl4lyk5wsP5CvuX6N0jlyeu_g2QhgoI6yIgAof5WaQ/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: ten + "_" + file.name,
-          file: base64
-        })
-      });
+    return output;
 
-      alert("✅ Đã gửi bài! (kiểm tra Drive)");
-    };
+  } catch(err) {
 
-    reader.readAsDataURL(file);
+    output.setContent(
+      JSON.stringify({
+        status:"error",
+        message:err.toString()
+      })
+    );
 
-  } catch (err) {
-    alert("❌ Lỗi: " + err);
+    return output;
+
   }
+
 }
