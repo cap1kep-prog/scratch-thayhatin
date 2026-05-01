@@ -2,80 +2,60 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Scratch Classroom Pro</title>
+<title>Scratch Classroom Pro - Nhúng Scratch thật</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body{margin:0;font-family:Arial;background:#f2f3f5}
-header{background:#ff4d4f;color:#fff;padding:10px 16px;display:flex;justify-content:space-between}
-.main{display:flex;height:calc(100vh - 48px)}
-.left{width:260px;background:#fff;border-right:1px solid #ddd;overflow:auto}
-.block{background:#4c97ff;color:#fff;padding:8px;margin:6px;border-radius:6px;font-size:13px}
-.middle{width:300px;background:#fafafa;border-right:1px solid #ddd;padding:10px}
-.middle input,select{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1px solid #ccc}
-.middle button{margin-top:10px;padding:10px;width:100%;background:#1677ff;color:white;border:none;border-radius:6px}
-.right{flex:1;display:flex;flex-direction:column}
-.stage-bar{background:#eee;padding:6px;display:flex;gap:8px;align-items:center}
-.flag{width:18px;height:18px;background:green}
-.stop{width:18px;height:18px;background:red}
-.stage{flex:1;display:flex;justify-content:center;align-items:center;background:#ddd}
-iframe{width:480px;height:360px;border:2px solid #333;border-radius:6px;background:#fff}
-.sprite-panel{height:100px;background:#fff;border-top:1px solid #ccc;display:flex;gap:10px;padding:8px}
-.sprite{width:60px;height:60px;background:#ffcc00;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.topbar{background:#ff4d4f;color:#fff;padding:10px;display:flex;gap:10px;align-items:center}
+.topbar button{background:#fff;color:#000;border:none;padding:6px 10px;border-radius:4px}
+.topbar .submit{background:#1d4ed8;color:#fff}
+.container{display:flex;height:calc(100vh - 50px)}
+.editor{flex:1}
+.editor iframe{width:100%;height:100%;border:none}
+.side{width:320px;background:#fff;border-left:1px solid #ccc;display:flex;flex-direction:column}
+.panel{padding:10px;border-bottom:1px solid #ccc}
+.panel input{width:100%;margin-top:6px;padding:6px}
+.panel button{margin-top:10px;width:100%;background:#1677ff;color:#fff;border:none;padding:8px}
+.stage{flex:1;background:#eee;display:flex;align-items:center;justify-content:center}
+.stage iframe{width:300px;height:220px;border:2px solid #333}
 .success{color:green;font-size:13px;display:none}
-.teacher{position:fixed;bottom:10px;right:10px;background:#000;color:#fff;padding:8px;border-radius:6px;cursor:pointer}
-.panel{position:fixed;top:50px;right:10px;width:320px;height:400px;background:#fff;border:1px solid #ccc;display:none;flex-direction:column}
-.panel iframe{width:100%;height:100%;border:none}
 </style>
 </head>
 <body>
-<header>
-<span>🎮 Scratch Classroom Pro</span>
-<span>Hệ thống nộp bài</span>
-</header>
 
-<div class="main">
-<div class="left">
-<div class="block">di chuyển 10 bước</div>
-<div class="block">xoay 15 độ</div>
-<div class="block">nói Xin chào</div>
-<div class="block">lặp lại 10 lần</div>
+<div class="topbar">
+<button>Settings</button>
+<button>Tập tin</button>
+<button>Chỉnh sửa</button>
+<button class="submit">Nộp bài cho thầy</button>
+<input style="flex:1;padding:6px" placeholder="Tên project">
 </div>
 
-<div class="middle">
+<div class="container">
+
+<!-- NHÚNG SCRATCH THẬT -->
+<div class="editor">
+<iframe src="https://scratch.mit.edu/projects/editor/?tutorial=getStarted"></iframe>
+</div>
+
+<!-- BÊN PHẢI -->
+<div class="side">
+
+<div class="panel">
 <h4>Nộp bài</h4>
 <input id="name" placeholder="Họ tên">
-<select id="class">
-<option value="">Chọn lớp</option>
-<option>4A</option>
-<option>4B</option>
-<option>5A</option>
-<option>5B</option>
-</select>
+<input id="class" placeholder="Lớp">
 <input id="title" placeholder="Tên bài">
 <input id="link" placeholder="Link Scratch">
-<button onclick="submitData()">🚀 Nộp</button>
+<button onclick="submitData()">🚀 Nộp bài</button>
 <div class="success" id="msg">✅ Đã nộp!</div>
 </div>
 
-<div class="right">
-<div class="stage-bar">
-<div class="flag" onclick="run()"></div>
-<div class="stop" onclick="stop()"></div>
-<span>Sân khấu</span>
-</div>
 <div class="stage">
 <iframe id="preview"></iframe>
 </div>
-<div class="sprite-panel">
-<div class="sprite">Mèo</div>
-<div class="sprite">Sprite</div>
-</div>
-</div>
-</div>
 
-<div class="teacher" onclick="togglePanel()">📊 Xem bài nộp</div>
-<div class="panel" id="panel">
-<iframe src="PASTE_GOOGLE_SHEET_LINK_HERE"></iframe>
+</div>
 </div>
 
 <script>
@@ -105,20 +85,8 @@ function submitData(){
   if(embed){document.getElementById('preview').src=embed}
  })
 }
-
-function run(){
- let iframe=document.getElementById('preview');
- iframe.src=iframe.src;
-}
-function stop(){
- document.getElementById('preview').src="";
-}
-
-function togglePanel(){
- let p=document.getElementById('panel');
- p.style.display=p.style.display==='flex'?'none':'flex';
-}
 </script>
+
 </body>
 </html>
 
