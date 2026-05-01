@@ -28,6 +28,7 @@ body{margin:0;font-family:Arial;background:#f2f3f5}
 <button>Tập tin</button>
 <button>Chỉnh sửa</button>
 <button class="submit">Nộp bài cho thầy</button>
+<button onclick="openScratch()" style="background:#22c55e;color:white;border:none;padding:6px 10px;border-radius:4px">🧩 Mở Scratch</button>
 <input style="flex:1;padding:6px" placeholder="Tên project">
 </div>
 
@@ -35,7 +36,13 @@ body{margin:0;font-family:Arial;background:#f2f3f5}
 
 <!-- NHÚNG SCRATCH THẬT -->
 <div class="editor">
-<iframe src="https://scratch.mit.edu/projects/editor/?tutorial=getStarted"></iframe>
+<!-- ❌ KHÔNG thể nhúng editor Scratch trực tiếp do bị chặn X-Frame-Options -->
+<div style="padding:20px;text-align:center">
+  <p>⚠️ Scratch không cho nhúng trực tiếp trình soạn thảo.</p>
+  <a href="https://scratch.mit.edu/projects/editor" target="_blank">
+    👉 Mở Scratch Editor ở tab mới
+  </a>
+</div>
 </div>
 
 <!-- BÊN PHẢI -->
@@ -85,6 +92,10 @@ function submitData(){
   if(embed){document.getElementById('preview').src=embed}
  })
 }
+function openScratch(){
+  window.open("https://scratch.mit.edu/projects/editor","_blank");
+}
+
 </script>
 
 </body>
