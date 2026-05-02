@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbxfBkbFkxnla4KPU0uHu-Aa0oXmVMmk9t6O5ABN522okFwdeOYWnF51blgZ9qOZh6UrbA/exec"; // 🔥 thay link
+const API_URL = "https://script.google.com/macros/s/AKfycbz-hdBLZfVCTcPoaHXxJzqXrnDMFjyoMCyomJpGnLLB0W9jngqm7KCgEqdJhrSut9w3Wg/exec"; // 🔥 thay link
 
 // MỞ SCRATCH
 function openScratch(){
